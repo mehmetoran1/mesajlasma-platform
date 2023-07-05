@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Gruplar">
+      <EntityTypeMapping TypeName="Model.Gruplar">
+        <MappingFragment StoreEntitySet="Gruplar">
+          <ScalarProperty Name="grupId" ColumnName="grupId" />
+          <ScalarProperty Name="grupAdi" ColumnName="grupAdi" />
+          <ScalarProperty Name="olusturanId" ColumnName="olusturanId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupUyeleri">
+      <EntityTypeMapping TypeName="Model.GrupUyeleri">
+        <MappingFragment StoreEntitySet="GrupUyeleri">
+          <ScalarProperty Name="grupUyeId" ColumnName="grupUyeId" />
+          <ScalarProperty Name="grupId" ColumnName="grupId" />
+          <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanicilar">
+      <EntityTypeMapping TypeName="Model.Kullanicilar">
+        <MappingFragment StoreEntitySet="Kullanicilar">
+          <ScalarProperty Name="kullaniciId" ColumnName="kullaniciId" />
+          <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+          <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="eposta" ColumnName="eposta" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mesajlar">
+      <EntityTypeMapping TypeName="Model.Mesajlar">
+        <MappingFragment StoreEntitySet="Mesajlar">
+          <ScalarProperty Name="mesajId" ColumnName="mesajId" />
+          <ScalarProperty Name="icerik" ColumnName="icerik" />
+          <ScalarProperty Name="mesajTarihi" ColumnName="mesajTarihi" />
+          <ScalarProperty Name="gonderenId" ColumnName="gonderenId" />
+          <ScalarProperty Name="aliciId" ColumnName="aliciId" />
+          <ScalarProperty Name="grupId" ColumnName="grupId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopluMesajAlicilar">
+      <EntityTypeMapping TypeName="Model.TopluMesajAlicilar">
+        <MappingFragment StoreEntitySet="TopluMesajAlicilar">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="mesajId" ColumnName="mesajId" />
+          <ScalarProperty Name="aliciId" ColumnName="aliciId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopluMesajlar">
+      <EntityTypeMapping TypeName="Model.TopluMesajlar">
+        <MappingFragment StoreEntitySet="TopluMesajlar">
+          <ScalarProperty Name="mesajId" ColumnName="mesajId" />
+          <ScalarProperty Name="icerik" ColumnName="icerik" />
+          <ScalarProperty Name="mesajTarihi" ColumnName="mesajTarihi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

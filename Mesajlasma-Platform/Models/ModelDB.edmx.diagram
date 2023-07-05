@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a4b73f18cea84d47850e1b7f7597a179" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Gruplar" Width="1.5" PointX="8.625" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GrupUyeleri" Width="1.5" PointX="5.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kullanicilar" Width="1.5" PointX="8.625" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Mesajlar" Width="1.5" PointX="10.875" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TopluMesajAlicilar" Width="2" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TopluMesajlar" Width="1.5" PointX="4.125" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Gruplar_Olusturan" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GrupUyeleri_Grup" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Mesajlar_Grup" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_GrupUyeleri_Uye" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Mesajlar_Alici" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Mesajlar_Gonderen" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TopluMesajAlicilar_Alici" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_TopluMesajAlicilar_Mesaj" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

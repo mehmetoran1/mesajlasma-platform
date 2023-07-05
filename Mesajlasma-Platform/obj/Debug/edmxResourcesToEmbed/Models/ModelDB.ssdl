@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Gruplar">
+    <Key>
+      <PropertyRef Name="grupId" />
+    </Key>
+    <Property Name="grupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="grupAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="olusturanId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GrupUyeleri">
+    <Key>
+      <PropertyRef Name="grupUyeId" />
+    </Key>
+    <Property Name="grupUyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="grupId" Type="int" Nullable="false" />
+    <Property Name="uyeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kullanicilar">
+    <Key>
+      <PropertyRef Name="kullaniciId" />
+    </Key>
+    <Property Name="kullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="adSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="eposta" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefon" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mesajlar">
+    <Key>
+      <PropertyRef Name="mesajId" />
+    </Key>
+    <Property Name="mesajId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="icerik" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mesajTarihi" Type="datetime" Nullable="false" />
+    <Property Name="gonderenId" Type="int" Nullable="false" />
+    <Property Name="aliciId" Type="int" />
+    <Property Name="grupId" Type="int" />
+  </EntityType>
+  <EntityType Name="TopluMesajAlicilar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mesajId" Type="int" Nullable="false" />
+    <Property Name="aliciId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TopluMesajlar">
+    <Key>
+      <PropertyRef Name="mesajId" />
+    </Key>
+    <Property Name="mesajId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="icerik" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="mesajTarihi" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Gruplar_Olusturan">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="Gruplar" Type="Self.Gruplar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="Gruplar">
+        <PropertyRef Name="olusturanId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GrupUyeleri_Grup">
+    <End Role="Gruplar" Type="Self.Gruplar" Multiplicity="1" />
+    <End Role="GrupUyeleri" Type="Self.GrupUyeleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gruplar">
+        <PropertyRef Name="grupId" />
+      </Principal>
+      <Dependent Role="GrupUyeleri">
+        <PropertyRef Name="grupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GrupUyeleri_Uye">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="GrupUyeleri" Type="Self.GrupUyeleri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="GrupUyeleri">
+        <PropertyRef Name="uyeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mesajlar_Alici">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="0..1" />
+    <End Role="Mesajlar" Type="Self.Mesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="Mesajlar">
+        <PropertyRef Name="aliciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mesajlar_Gonderen">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="Mesajlar" Type="Self.Mesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="Mesajlar">
+        <PropertyRef Name="gonderenId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mesajlar_Grup">
+    <End Role="Gruplar" Type="Self.Gruplar" Multiplicity="0..1" />
+    <End Role="Mesajlar" Type="Self.Mesajlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gruplar">
+        <PropertyRef Name="grupId" />
+      </Principal>
+      <Dependent Role="Mesajlar">
+        <PropertyRef Name="grupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TopluMesajAlicilar_Alici">
+    <End Role="Kullanicilar" Type="Self.Kullanicilar" Multiplicity="1" />
+    <End Role="TopluMesajAlicilar" Type="Self.TopluMesajAlicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanicilar">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="TopluMesajAlicilar">
+        <PropertyRef Name="aliciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TopluMesajAlicilar_Mesaj">
+    <End Role="TopluMesajlar" Type="Self.TopluMesajlar" Multiplicity="1" />
+    <End Role="TopluMesajAlicilar" Type="Self.TopluMesajAlicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TopluMesajlar">
+        <PropertyRef Name="mesajId" />
+      </Principal>
+      <Dependent Role="TopluMesajAlicilar">
+        <PropertyRef Name="mesajId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Gruplar" EntityType="Self.Gruplar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GrupUyeleri" EntityType="Self.GrupUyeleri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanicilar" EntityType="Self.Kullanicilar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mesajlar" EntityType="Self.Mesajlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TopluMesajAlicilar" EntityType="Self.TopluMesajAlicilar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TopluMesajlar" EntityType="Self.TopluMesajlar" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Gruplar_Olusturan" Association="Self.FK_Gruplar_Olusturan">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="Gruplar" EntitySet="Gruplar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GrupUyeleri_Grup" Association="Self.FK_GrupUyeleri_Grup">
+      <End Role="Gruplar" EntitySet="Gruplar" />
+      <End Role="GrupUyeleri" EntitySet="GrupUyeleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GrupUyeleri_Uye" Association="Self.FK_GrupUyeleri_Uye">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="GrupUyeleri" EntitySet="GrupUyeleri" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mesajlar_Alici" Association="Self.FK_Mesajlar_Alici">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="Mesajlar" EntitySet="Mesajlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mesajlar_Gonderen" Association="Self.FK_Mesajlar_Gonderen">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="Mesajlar" EntitySet="Mesajlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mesajlar_Grup" Association="Self.FK_Mesajlar_Grup">
+      <End Role="Gruplar" EntitySet="Gruplar" />
+      <End Role="Mesajlar" EntitySet="Mesajlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TopluMesajAlicilar_Alici" Association="Self.FK_TopluMesajAlicilar_Alici">
+      <End Role="Kullanicilar" EntitySet="Kullanicilar" />
+      <End Role="TopluMesajAlicilar" EntitySet="TopluMesajAlicilar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TopluMesajAlicilar_Mesaj" Association="Self.FK_TopluMesajAlicilar_Mesaj">
+      <End Role="TopluMesajlar" EntitySet="TopluMesajlar" />
+      <End Role="TopluMesajAlicilar" EntitySet="TopluMesajAlicilar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
